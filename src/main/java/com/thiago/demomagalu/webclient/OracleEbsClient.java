@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface OracleEbsClient {
 
     @GetMapping
-    ResponseEntity<OracleEbsResponseDTO> getAddress();
+    ResponseEntity<OracleEbsResponseDTO> getOracleEbsTransaction();
 }
