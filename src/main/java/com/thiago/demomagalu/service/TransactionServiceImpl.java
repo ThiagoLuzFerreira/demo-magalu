@@ -5,8 +5,10 @@ import com.thiago.demomagalu.model.dto.TransactionRequestDTO;
 import com.thiago.demomagalu.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
+import static com.thiago.demomagalu.mapper.GenericModelMapper.mapper;
 import static com.thiago.demomagalu.mapper.GenericModelMapper.parseObject;
 
 @Service
@@ -27,6 +29,12 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction savedTransaction = repository.save(transaction);
 
         return parseObject(savedTransaction, TransactionRequestDTO.class);
+    }
+
+    @Override
+    public TransactionRequestDTO findByOracleTransactionId(String transactionId) {
+        Transaction transaction = repository.findByOracleTransactionId(transactionId).orElse(null);
+        return parseObject(transaction, TransactionRequestDTO.class);
     }
 
 }
