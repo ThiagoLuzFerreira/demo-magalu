@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

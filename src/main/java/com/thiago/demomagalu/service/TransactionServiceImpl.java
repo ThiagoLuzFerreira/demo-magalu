@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thiago.demomagalu.exception.handler.BusinessException;
 import com.thiago.demomagalu.exception.handler.DataIntegrityViolationException;
 import com.thiago.demomagalu.exception.handler.ResourceNotFoundException;
-import com.thiago.demomagalu.model.AuditLog;
 import com.thiago.demomagalu.model.Transaction;
 import com.thiago.demomagalu.model.dto.TransactionRequestDTO;
 import com.thiago.demomagalu.model.dto.TransactionResponseDTO;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
