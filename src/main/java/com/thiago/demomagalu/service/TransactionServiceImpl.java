@@ -29,21 +29,20 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final OracleEbsClient client;
     private final TransactionProducer producer;
-    private final AuditLogRepository auditLogRepository;
-    private final ObjectMapper objectMapper;
+    private final AuditLogService auditLogService;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository, OracleEbsClient client, TransactionProducer producer, AuditLogRepository auditLogRepository, ObjectMapper objectMapper) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, OracleEbsClient client, TransactionProducer producer, AuditLogRepository auditLogRepository, ObjectMapper objectMapper, AuditLogService auditLogService) {
         this.transactionRepository = transactionRepository;
         this.client = client;
         this.producer = producer;
-        this.auditLogRepository = auditLogRepository;
-        this.objectMapper = objectMapper;
+        this.auditLogService = auditLogService;
     }
 
     @Override
     public TransactionResponseDTO save(TransactionRequestDTO request) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         Optional<Transaction> transactionAccount = transactionRepository.findByAccount(request.getAccount());
         if (transactionAccount.isPresent() && request.getAccount().equals(transactionAccount.get().getAccount())){
             throw new DataIntegrityViolationException("Account already registred");
@@ -53,13 +52,16 @@ public class TransactionServiceImpl implements TransactionService {
 
         Transaction transaction = parseObject(request, Transaction.class);
         ResponseEntity<OracleEbsResponseDTO> ebsTransaction = client.getOracleEbsTransaction();
+
         transaction.setTransactionDate(LocalDate.parse(request.getTransactionDate(), formatter));
         transaction.setOracleTransactionId(ebsTransaction.getBody().getNumeroTransacao().toString());
         transaction.setStatus(ebsTransaction.getBody().getStatusTransacao().name());
+
         Transaction savedTransaction = transactionRepository.save(transaction);
         producer.publishTransactionMessage(savedTransaction);
+
         TransactionResponseDTO response = parseObject(savedTransaction, TransactionResponseDTO.class);
-        persistAuditLog("/api/v1/transactions", "POST", request, response);
+        auditLogService.save("/api/v1/transactions", "POST", request, response);
 
         return response;
     }
@@ -69,17 +71,5 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction = transactionRepository.findByOracleTransactionId(transactionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Registro não encontrado para transação Oracle EBS com o identificador ".concat(transactionId)));
         return parseObject(transaction, TransactionRequestDTO.class);
-    }
-
-    private void persistAuditLog(String endpoint, String httpMethod, Object request, Object response) {
-        try {
-            String requestJson = objectMapper.writeValueAsString(request);
-            String responseJson = objectMapper.writeValueAsString(response);
-
-            AuditLog auditLog = new AuditLog(endpoint, httpMethod, requestJson, responseJson, LocalDateTime.now());
-            auditLogRepository.save(auditLog);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao persistir log de auditoria", e);
-        }
     }
 }
