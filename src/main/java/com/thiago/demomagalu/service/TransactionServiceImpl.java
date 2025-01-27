@@ -8,6 +8,9 @@ import com.thiago.demomagalu.webclient.dto.OracleEbsResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static com.thiago.demomagalu.mapper.GenericModelMapper.parseObject;
 
 @Service
@@ -26,6 +29,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         Transaction transaction = parseObject(request, Transaction.class);
         ResponseEntity<OracleEbsResponseDTO> ebsTransaction = client.getOracleEbsTransaction();
+        transaction.setTransactionDate(LocalDate.parse(request.getTransactionDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         transaction.setOracleTransactionId(ebsTransaction.getBody().getNumeroTransacao().toString());
         transaction.setStatus(ebsTransaction.getBody().getStatusTransacao().name());
         Transaction savedTransaction = repository.save(transaction);
