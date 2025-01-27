@@ -2,23 +2,23 @@ package com.thiago.demomagalu.model.dto;
 
 public class TransactionResponseDTO {
 
-    private String operationResult;
+    private String status;
     private String oracleTransactionId;
 
     public TransactionResponseDTO() {
     }
 
-    public TransactionResponseDTO(String operationResult, String oracleTransactionId) {
-        this.operationResult = operationResult;
+    public TransactionResponseDTO(String status, String oracleTransactionId) {
+        this.status = status;
         this.oracleTransactionId = oracleTransactionId;
     }
 
-    public String getOperationResult() {
-        return operationResult;
+    public String getStatus() {
+        return status;
     }
 
-    public void setOperationResult(String operationResult) {
-        this.operationResult = operationResult;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getOracleTransactionId() {

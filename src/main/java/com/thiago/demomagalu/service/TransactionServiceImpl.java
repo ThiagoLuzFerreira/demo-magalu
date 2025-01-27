@@ -5,6 +5,7 @@ import com.thiago.demomagalu.exception.handler.DataIntegrityViolationException;
 import com.thiago.demomagalu.exception.handler.ResourceNotFoundException;
 import com.thiago.demomagalu.model.Transaction;
 import com.thiago.demomagalu.model.dto.TransactionRequestDTO;
+import com.thiago.demomagalu.model.dto.TransactionResponseDTO;
 import com.thiago.demomagalu.repository.TransactionRepository;
 import com.thiago.demomagalu.webclient.OracleEbsClient;
 import com.thiago.demomagalu.webclient.dto.OracleEbsResponseDTO;
@@ -29,7 +30,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionRequestDTO save(TransactionRequestDTO request) {
+    public TransactionResponseDTO save(TransactionRequestDTO request) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Optional<Transaction> transactionAccount = repository.findByAccount(request.getAccount());
@@ -46,7 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setStatus(ebsTransaction.getBody().getStatusTransacao().name());
         Transaction savedTransaction = repository.save(transaction);
 
-        return parseObject(savedTransaction, TransactionRequestDTO.class);
+        return parseObject(savedTransaction, TransactionResponseDTO.class);
     }
 
     @Override

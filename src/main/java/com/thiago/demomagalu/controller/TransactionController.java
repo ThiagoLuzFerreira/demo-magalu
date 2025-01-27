@@ -1,6 +1,7 @@
 package com.thiago.demomagalu.controller;
 
 import com.thiago.demomagalu.model.dto.TransactionRequestDTO;
+import com.thiago.demomagalu.model.dto.TransactionResponseDTO;
 import com.thiago.demomagalu.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionRequestDTO> createTransaction(@Valid @RequestBody TransactionRequestDTO request){
+    public ResponseEntity<TransactionResponseDTO> createTransaction(@Valid @RequestBody TransactionRequestDTO request){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(request));
     }
 
