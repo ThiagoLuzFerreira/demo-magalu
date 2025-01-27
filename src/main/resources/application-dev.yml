@@ -39,3 +39,9 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     org.hibernate: ERROR
+
+jwt:
+  private:
+    key: classpath:app.key
+  public:
+    key: classpath:app.pub
