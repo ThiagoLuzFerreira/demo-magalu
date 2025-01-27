@@ -21,6 +21,9 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  sql:
+    init:
+      mode: always
   rabbitmq:
     host: localhost
     port: 5672

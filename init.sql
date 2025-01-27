@@ -1,1 +1,0 @@
-CREATE DATABASE demo_magalu_database
