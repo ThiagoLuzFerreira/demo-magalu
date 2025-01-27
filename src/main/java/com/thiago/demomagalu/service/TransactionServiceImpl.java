@@ -6,6 +6,7 @@ import com.thiago.demomagalu.exception.handler.ResourceNotFoundException;
 import com.thiago.demomagalu.model.Transaction;
 import com.thiago.demomagalu.model.dto.TransactionRequestDTO;
 import com.thiago.demomagalu.model.dto.TransactionResponseDTO;
+import com.thiago.demomagalu.producer.TransactionProducer;
 import com.thiago.demomagalu.repository.TransactionRepository;
 import com.thiago.demomagalu.webclient.OracleEbsClient;
 import com.thiago.demomagalu.webclient.dto.OracleEbsResponseDTO;
@@ -23,10 +24,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository repository;
     private final OracleEbsClient client;
+    private final TransactionProducer producer;
 
-    public TransactionServiceImpl(TransactionRepository repository, OracleEbsClient client) {
+    public TransactionServiceImpl(TransactionRepository repository, OracleEbsClient client, TransactionProducer producer) {
         this.repository = repository;
         this.client = client;
+        this.producer = producer;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setOracleTransactionId(ebsTransaction.getBody().getNumeroTransacao().toString());
         transaction.setStatus(ebsTransaction.getBody().getStatusTransacao().name());
         Transaction savedTransaction = repository.save(transaction);
-
+        producer.publishTransactionMessage(savedTransaction);
         return parseObject(savedTransaction, TransactionResponseDTO.class);
     }
 

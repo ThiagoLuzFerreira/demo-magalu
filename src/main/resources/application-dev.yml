@@ -29,7 +29,7 @@ spring:
 
 mq:
   queues:
-    email-queue: default-email-queue
+    magalu-queue: default-magalu-queue
 
 logging:
   level:
