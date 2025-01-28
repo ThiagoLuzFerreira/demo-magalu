@@ -16,7 +16,7 @@ public class AuditLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "audit_log_id")
-    private Long id;
+    private Long auditLogId;
 
     @Column(nullable = false)
     private String endpoint;
@@ -44,21 +44,12 @@ public class AuditLog {
         this.timestamp = timestamp;
     }
 
-    public AuditLog(Long id, String endpoint, String httpMethod, String requestPayload, String responsePayload, LocalDateTime timestamp) {
-        this.id = id;
-        this.endpoint = endpoint;
-        this.httpMethod = httpMethod;
-        this.requestPayload = requestPayload;
-        this.responsePayload = responsePayload;
-        this.timestamp = timestamp;
-    }
-
     public Long getId() {
-        return id;
+        return auditLogId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.auditLogId = id;
     }
 
     public String getEndpoint() {

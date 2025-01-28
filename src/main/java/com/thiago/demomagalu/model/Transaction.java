@@ -16,7 +16,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private Long id;
+    private Long transactionId;
     @Column(unique = true)
     private String account;
     private BigDecimal amount;
@@ -28,8 +28,8 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Long id, String account, BigDecimal amount, LocalDate transactionDate, String costCenter, String oracleTransactionId, String status) {
-        this.id = id;
+    public Transaction(Long transactionId, String account, BigDecimal amount, LocalDate transactionDate, String costCenter, String oracleTransactionId, String status) {
+        this.transactionId = transactionId;
         this.account = account;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -39,7 +39,7 @@ public class Transaction {
     }
 
     public Long getId() {
-        return id;
+        return transactionId;
     }
 
     public String getAccount() {
