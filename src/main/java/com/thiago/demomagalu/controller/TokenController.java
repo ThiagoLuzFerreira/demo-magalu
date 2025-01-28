@@ -22,7 +22,6 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class TokenController {
 
-    //TODO criar service e execeção personalizada BadCredencials
     private final JwtEncoder jwtEncoder;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;

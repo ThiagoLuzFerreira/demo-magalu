@@ -28,22 +28,14 @@ public class User {
     @Column(unique = true)
     private String username;
     private String password;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "tb_users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(UUID userId, String username, String password, Set<Role> roles) {
+    public User(UUID userId, String username, String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.roles = roles;
     }
 
     public UUID getUserId() {
@@ -68,14 +60,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
     public boolean isLoginCorrect(LoginRequest request, PasswordEncoder passwordEncoder) {
