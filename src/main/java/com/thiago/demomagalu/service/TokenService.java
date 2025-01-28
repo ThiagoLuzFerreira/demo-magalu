@@ -1,9 +1,9 @@
 package com.thiago.demomagalu.service;
 
-import com.thiago.demomagalu.controller.dto.LoginRequest;
-import com.thiago.demomagalu.controller.dto.LoginResponse;
+import com.thiago.demomagalu.controller.dto.LoginRequestDTO;
+import com.thiago.demomagalu.controller.dto.LoginResponseDTO;
 
 public interface TokenService {
 
-    LoginResponse authenticate(LoginRequest request);
+    LoginResponseDTO authenticate(LoginRequestDTO request);
 }

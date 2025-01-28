@@ -1,7 +1,7 @@
 package com.thiago.demomagalu.service;
 
-import com.thiago.demomagalu.controller.dto.LoginRequest;
-import com.thiago.demomagalu.controller.dto.LoginResponse;
+import com.thiago.demomagalu.controller.dto.LoginRequestDTO;
+import com.thiago.demomagalu.controller.dto.LoginResponseDTO;
 import com.thiago.demomagalu.exception.handler.BadCredentialsException;
 import com.thiago.demomagalu.model.User;
 import com.thiago.demomagalu.repository.UserRepository;
@@ -28,7 +28,7 @@ public class TokenServiceImpl implements TokenService{
     }
 
     @Override
-    public LoginResponse authenticate(LoginRequest request) {
+    public LoginResponseDTO authenticate(LoginRequestDTO request) {
 
         Optional<User> user = userRepository.findByUsername(request.username());
 
@@ -47,6 +47,6 @@ public class TokenServiceImpl implements TokenService{
 
         var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-        return new LoginResponse(jwtValue, expiresIn);
+        return new LoginResponseDTO(jwtValue, expiresIn);
     }
 }

@@ -1,7 +1,7 @@
 package com.thiago.demomagalu.controller;
 
-import com.thiago.demomagalu.controller.dto.LoginRequest;
-import com.thiago.demomagalu.controller.dto.LoginResponse;
+import com.thiago.demomagalu.controller.dto.LoginRequestDTO;
+import com.thiago.demomagalu.controller.dto.LoginResponseDTO;
 import com.thiago.demomagalu.service.TokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public class TokenController {
     }
 
     @PostMapping("/token")
-    private ResponseEntity<LoginResponse> authenticate(@RequestBody LoginRequest request){
+    private ResponseEntity<LoginResponseDTO> authenticate(@RequestBody LoginRequestDTO request){
         return ResponseEntity.ok(tokenService.authenticate(request));
     }
 }
