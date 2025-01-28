@@ -2,10 +2,10 @@ package com.thiago.demomagalu.controller;
 
 import com.thiago.demomagalu.controller.dto.LoginRequest;
 import com.thiago.demomagalu.controller.dto.LoginResponse;
+import com.thiago.demomagalu.exception.handler.BadCredentialsException;
 import com.thiago.demomagalu.model.User;
 import com.thiago.demomagalu.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
