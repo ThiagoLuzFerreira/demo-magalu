@@ -38,7 +38,7 @@ public class Transaction {
         this.status = status;
     }
 
-    public Long getId() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
@@ -46,16 +46,8 @@ public class Transaction {
         return account;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
     public BigDecimal getAmount() {
         return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 
     public LocalDate getTransactionDate() {
@@ -68,10 +60,6 @@ public class Transaction {
 
     public String getCostCenter() {
         return costCenter;
-    }
-
-    public void setCostCenter(String costCenter) {
-        this.costCenter = costCenter;
     }
 
     public String getOracleTransactionId() {
