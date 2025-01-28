@@ -5,12 +5,12 @@ import java.util.UUID;
 public class OracleEbsResponseDTO {
 
     private UUID numeroTransacao;
-    private StatusTransacao statusTransacao;
+    private TransactionStatus statusTransacao;
 
     public OracleEbsResponseDTO() {
     }
 
-    public OracleEbsResponseDTO(UUID numeroTransacao, StatusTransacao statusTransacao) {
+    public OracleEbsResponseDTO(UUID numeroTransacao, TransactionStatus statusTransacao) {
         this.numeroTransacao = numeroTransacao;
         this.statusTransacao = statusTransacao;
     }
@@ -23,11 +23,11 @@ public class OracleEbsResponseDTO {
         this.numeroTransacao = numeroTransacao;
     }
 
-    public StatusTransacao getStatusTransacao() {
+    public TransactionStatus getStatusTransacao() {
         return statusTransacao;
     }
 
-    public void setStatusTransacao(StatusTransacao statusTransacao) {
+    public void setStatusTransacao(TransactionStatus statusTransacao) {
         this.statusTransacao = statusTransacao;
     }
 }
