@@ -29,8 +29,10 @@ public class TokenServiceImpl implements TokenService{
 
     @Override
     public LoginResponse authenticate(LoginRequest request) {
+
         Optional<User> user = userRepository.findByUsername(request.username());
-        if(user.isEmpty() || !user.get().isLoginCorrect(request, bCryptPasswordEncoder)){
+
+        if (user.isEmpty() || !bCryptPasswordEncoder.matches(request.password(), user.get().getPassword())){
             throw new BadCredentialsException("Username or password is incorrect");
         }
 

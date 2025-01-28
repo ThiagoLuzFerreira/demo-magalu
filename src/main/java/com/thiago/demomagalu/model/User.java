@@ -61,8 +61,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean isLoginCorrect(LoginRequest request, PasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(request.password(), this.password);
-    }
 }
