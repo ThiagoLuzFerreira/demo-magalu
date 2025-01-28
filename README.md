@@ -12,8 +12,6 @@
 ### Com o docker rodando, ir ao diretório raiz do projeto em um terminal e executar o comando "docker-compose up".
 ### Em seguida excutar a aplicacao.
 
-### Os endpoints estão disponíveis no link:
-
 ### Usuário e senha para gerar o token:
 
 - Usuário: admin;
