@@ -20,6 +20,13 @@ services:
       - "15672:15672"
     networks:
       - demo-project-network
+  simulador-oracleebs:
+    image: tlrferreira83/demo-magalu:simulador-oracleebs
+    container_name: simulador-oracleebs-container
+    ports:
+      - "8081:8081"
+    networks:
+      - demo-project-network
 
 networks:
   demo-project-network:
