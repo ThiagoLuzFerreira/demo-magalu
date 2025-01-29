@@ -9,10 +9,9 @@
 - Ter Maven instalado
 - Ter Docker instalado
 
+### Clonar o repositório do projeto 
 ### Com o docker rodando, ir ao diretório raiz do projeto em um terminal e executar o comando "docker-compose up".
-### Em seguida excutar a aplicacao.
-
-### Usuário e senha para gerar o token:
-
-- Usuário: admin;
-- Senha: 123;
+### Em seguida excutar a aplicacao spring boot.
+### Na pasta postman há uma collection com exemplos das chamadas para a API
+### Como os endpoints estão protegidos com OAuth2, gerar o token no endpoint /api/v1/token e utilizá-lo nos outros endpoints com Auth type: Bearer Token 
+### Na pasta docs estão os relatórios solicitados no teste
